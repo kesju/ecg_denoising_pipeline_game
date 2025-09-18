@@ -1,0 +1,24 @@
+fs: 200
+memory_lean: true
+filter:
+  enabled: true
+  method: butter   # or 'neurokit' if you have neurokit2 installed
+  type: bandpass
+  lowcut: 0.5
+  highcut: 40.0
+  order: 4
+outliers:
+  enabled: true
+  z_thresh: 3.5
+  min_len: 8
+  merge_gap: 10
+rdropouts:
+  enabled: true
+  win: 40
+  var_thresh: 1.0e-5
+  merge_gap: 10
+motions:
+  enabled: true
+  win: 20
+  std_thresh: 0.15
+  merge_gap: 10
