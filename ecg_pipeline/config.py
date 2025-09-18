@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, Literal
 import yaml
 
@@ -36,11 +36,12 @@ class MotionsParams:
 class PipelineConfig:
     fs: int = 200
     memory_lean: bool = True
-    filter: FilterParams = FilterParams()
-    outliers: OutliersParams = OutliersParams()
-    rdropouts: RDropoutsParams = RDropoutsParams()
-    motions: MotionsParams = MotionsParams()
+    filter: FilterParams = field(default_factory=FilterParams)
+    outliers: OutliersParams = field(default_factory=OutliersParams)
+    rdropouts: RDropoutsParams = field(default_factory=RDropoutsParams)
+    motions: MotionsParams = field(default_factory=MotionsParams)
 
+    
 def load_config_yaml(path: str) -> PipelineConfig:
     """Load config from a YAML file into PipelineConfig dataclasses."""
     with open(path, "r", encoding="utf-8") as f:
@@ -57,6 +58,7 @@ def load_config_yaml(path: str) -> PipelineConfig:
     outliers_cfg = merge_dataclass(OutliersParams, data.get("outliers"))
     rdrop_cfg = merge_dataclass(RDropoutsParams, data.get("rdropouts"))
     motions_cfg = merge_dataclass(MotionsParams, data.get("motions"))
+
 
     cfg = PipelineConfig(
         fs=data.get("fs", 200),
