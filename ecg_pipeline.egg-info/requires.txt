@@ -1,0 +1,7 @@
+numpy
+matplotlib
+scipy
+pyyaml
+
+[:python_version >= "3.9"]
+neurokit2
